@@ -1,0 +1,43 @@
+services:
+  kavach:
+    build: .
+    container_name: agent-kavach
+    # Zero open ports: the daemon listens ONLY on this mounted Unix socket.
+    volumes:
+      - kavach-run:/run/kavach
+      - kavach-data:/data
+      # Mount the host docker socket to enable the Docker sandbox executor.
+      # Remove this line to force the local-subprocess fallback (which v3
+      # hardens with no_new_privs/seccomp/cgroup, but which is still a host
+      # process — see docs/SECURITY.md §5.1).
+      - /var/run/docker.sock:/var/run/docker.sock
+      # For the gVisor backend (`backend: runsc` in policy.yaml) the daemon also
+      # needs the runsc binary, and gVisor needs --privileged or a cgroup
+      # namespace to nest inside a container:
+      #   docker run --privileged gcr.io/gvisor-dev/gvisor:latest
+      # See docs/SECURITY.md §4.8.
+    environment:
+      KAVACH_FETCH_ALLOWLIST: example.com
+      # v3 audit anchoring: inject the HMAC key at run time (never bake it into
+      # the image). Left empty here, -verify reports the chain as UNANCHORED.
+      KAVACH_ANCHOR_KEY: "${KAVACH_ANCHOR_KEY:-}"
+      # The anchors live beside the audit log in the kavach-data volume, so
+      # ship that volume off-box (append-only/WORM) to make them evidence.
+    restart: unless-stopped
+
+  # Production build of the Vite dashboard. Run `make web-build` first
+  # (or `npm run build` in web/) so ./web/dist exists.
+  web:
+    image: node:22-alpine
+    container_name: agent-kavach-web
+    working_dir: /srv
+    volumes:
+      - ./web/dist:/srv:ro
+    command: ["sh", "-c", "npm i -g serve >/dev/null 2>&1; serve -l 4173"]
+    ports:
+      - "127.0.0.1:4173:4173"
+    profiles: ["web"]
+
+volumes:
+  kavach-run:
+  kavach-data:

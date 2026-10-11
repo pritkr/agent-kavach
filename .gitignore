@@ -1,0 +1,33 @@
+# Go
+daemon/daemon
+daemon/*.test
+*.sock
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Node
+node_modules/
+runner/dist/
+web/dist/
+
+# Secrets & runtime state (0600 socket/token, audit/trace ledgers, workspaces)
+*.token
+*.sock
+audit.jsonl
+trace.json
+traj.jsonl
+/tmp/agent-kavach/
+/data/
+
+# Eval runtime (keep committed golden trajs/, ignore regenerations elsewhere)
+/tmp/kavach-*.log
+/tmp/kavach-*.pid
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

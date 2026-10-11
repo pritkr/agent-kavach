@@ -1,0 +1,91 @@
+# agent-kavach policy manifest (v3).
+#
+# Single declarative file that configures the Go daemon (loaded at boot via
+# `-policy`) and the Python MCP gateway (`--policy` / `$KAVACH_POLICY`,
+# auto-discovered at `<repo>/policy.yaml`).
+#
+# Parsing is deliberately strict — a typo can never silently widen access:
+# unknown top-level keys, unknown tool names, unknown per-tool keys and
+# out-of-range values are hard errors that abort startup (gateway exit 2,
+# daemon refuses to boot). A tool that is not listed inherits the built-in
+# default; a tool outside the closed set of 5 is always `unknown_tool`.
+#
+# Top-level:
+#   workspace:          root every file-read/eval-run path is resolved inside
+#                       (absolute paths, ".." and symlink escapes are rejected)
+#   network_allowlist:  hosts web-fetch may reach (exact host or "*.suffix")
+#   default_timeout_sec: ceiling for runs submitted without a tool binding
+#   backend:            which sandbox executor runs agent commands —
+#                       `auto` (default: strongest available = runsc → docker
+#                       → local), or pin one of `runsc` (gVisor), `docker` or
+#                       `local`. A pinned backend that is not installed is a hard
+#                       failure per run, never a silent downgrade: asking for
+#                       gVisor and getting a host process is the failure this key
+#                       exists to prevent. See `GET /v1/backends` for what this
+#                       host actually offers.
+#
+# Per-tool:
+#   allow:        false removes the tool everywhere (fail-closed deny).
+#   timeout_sec:  per-tool wall-clock cap (1..30). The daemon binds a
+#                tool-attached run to this value and the MCP gateway rejects a
+#                larger `timeout_sec` argument with an `invalid_args` error,
+#                so policy cannot be widened from the client side.
+#   env:          names of process-env variables this tool may receive. Values
+#                are injected at exec time from the daemon's environment and
+#                are NEVER written to trajectory/audit logs (redacted as
+#                `[REDACTED]`). Names, never values, live in this file.
+#
+# Least privilege is the point: web-fetch and eval-run intentionally get NO
+# secrets, because fetched content and executed scripts are the least trusted
+# inputs in the system. Grant a credential to a tool only if that tool is at
+# least as trusted as the credential.
+
+workspace: /tmp/agent-kavach/workspace
+
+network_allowlist:
+  - example.com
+
+default_timeout_sec: 120
+
+# Which executor runs agent commands. `auto` takes the strongest one that is
+# actually installed here: gVisor (`runsc`) → Docker → the local subprocess.
+# Pin `runsc` in production once gVisor is registered with dockerd — then a
+# missing runtime fails every run loudly instead of quietly falling back to a
+# host process. See README "Enabling gVisor (runsc)" and `GET /v1/backends`.
+backend: auto
+
+tools:
+  # Operator-chosen, workspace-scoped commands. The only tool allowed to see
+  # a credential — narrow this list to the specific names you use.
+  shell-sandboxed:
+    allow: true
+    timeout_sec: 30
+    env:
+      - KAVACH_DEMO_TOKEN
+
+  # Reads inside the workspace. Needs no credentials.
+  file-read:
+    allow: true
+    timeout_sec: 30
+    env: []
+
+  # Content fetched from the internet is attacker-controlled input: no secrets.
+  # Drop the host from network_allowlist above and this tool does nothing.
+  web-fetch:
+    allow: true
+    timeout_sec: 10
+    env: []
+
+  # Static registry lookup.
+  scheme-lookup:
+    allow: true
+    timeout_sec: 10
+    env: []
+
+  # Executes a workspace .py file: arbitrary code, so no secrets.
+  # Set `allow: false` to remove it entirely — the gateway and the daemon then
+  # both answer `tool_denied` for every call.
+  eval-run:
+    allow: true
+    timeout_sec: 30
+    env: []

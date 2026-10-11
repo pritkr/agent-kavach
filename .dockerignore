@@ -1,0 +1,10 @@
+node_modules
+runner/dist
+web/dist
+web/node_modules
+daemon/daemon
+__pycache__
+.pytest_cache
+.git
+eval/trajs
+/tmp
