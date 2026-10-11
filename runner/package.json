@@ -1,0 +1,17 @@
+{
+  "name": "agent-kavach-runner",
+  "version": "1.0.0",
+  "description": "Plan-act-observe agent loop + trajectory replay for agent-kavach",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "bun check",
+    "check": "bun check",
+    "test": "npm run build && node --test \"dist/tests/*.test.js\"",
+    "replay": "node dist/scripts/replay.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}
