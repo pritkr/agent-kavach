@@ -1,0 +1,5 @@
+{"seq":1,"ts":"2026-09-25T23:34:02.453Z","runId":"kill-drill-s2","phase":"plan","step":1,"tool":"shell-sandboxed","args":{"command":["sleep","3"]}}
+{"seq":2,"ts":"2026-09-25T23:34:02.454Z","runId":"kill-drill-s2","phase":"tool","step":1,"tool":"shell-sandboxed","args":{"command":["sleep","3"]}}
+{"seq":3,"ts":"2026-09-25T23:34:05.483Z","runId":"kill-drill-s2","phase":"observe","step":1,"tool":"shell-sandboxed","observation":{"step":1,"tool":"shell-sandboxed","ok":true,"output":{"exit_code":0,"output":"","truncated":false,"timeout_sec":30},"latencyMs":3029,"attempt":1}}
+{"seq":4,"ts":"2026-09-25T23:34:05.484Z","runId":"kill-drill-s2","phase":"killed","reason":"eval drill"}
+{"seq":5,"ts":"2026-09-25T23:34:05.484Z","runId":"kill-drill-s2","phase":"done","status":"killed"}

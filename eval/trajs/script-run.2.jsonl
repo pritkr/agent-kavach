@@ -1,0 +1,4 @@
+{"seq":1,"ts":"2026-09-25T23:33:56.326Z","runId":"script-run-s2","phase":"plan","step":1,"tool":"eval-run","args":{"script":"checks/smoke.py"}}
+{"seq":2,"ts":"2026-09-25T23:33:56.326Z","runId":"script-run-s2","phase":"tool","step":1,"tool":"eval-run","args":{"script":"checks/smoke.py"}}
+{"seq":3,"ts":"2026-09-25T23:33:56.365Z","runId":"script-run-s2","phase":"observe","step":1,"tool":"eval-run","observation":{"step":1,"tool":"eval-run","ok":true,"output":{"script":"checks/smoke.py","exit_code":0,"output":"smoke-ok\n","truncated":false},"latencyMs":39,"attempt":1}}
+{"seq":4,"ts":"2026-09-25T23:33:56.365Z","runId":"script-run-s2","phase":"done","status":"done"}

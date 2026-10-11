@@ -1,0 +1,4 @@
+{"seq":1,"ts":"2026-09-25T23:33:56.410Z","runId":"forbidden-path-s2","phase":"plan","step":1,"tool":"file-read","args":{"path":"../secret.txt"}}
+{"seq":2,"ts":"2026-09-25T23:33:56.410Z","runId":"forbidden-path-s2","phase":"tool","step":1,"tool":"file-read","args":{"path":"../secret.txt"}}
+{"seq":3,"ts":"2026-09-25T23:33:56.411Z","runId":"forbidden-path-s2","phase":"observe","step":1,"tool":"file-read","observation":{"step":1,"tool":"file-read","ok":false,"error":{"code":"INVALID_ARGS","message":"path escapes workspace: '../secret.txt'","retryable":false,"tool":"file-read","attempt":1},"latencyMs":1,"attempt":4}}
+{"seq":4,"ts":"2026-09-25T23:33:56.411Z","runId":"forbidden-path-s2","phase":"done","status":"failed"}

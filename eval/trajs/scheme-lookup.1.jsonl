@@ -1,0 +1,4 @@
+{"seq":1,"ts":"2026-09-25T23:33:56.245Z","runId":"scheme-lookup-s1","phase":"plan","step":1,"tool":"scheme-lookup","args":{"name":"balanced"}}
+{"seq":2,"ts":"2026-09-25T23:33:56.245Z","runId":"scheme-lookup-s1","phase":"tool","step":1,"tool":"scheme-lookup","args":{"name":"balanced"}}
+{"seq":3,"ts":"2026-09-25T23:33:56.246Z","runId":"scheme-lookup-s1","phase":"observe","step":1,"tool":"scheme-lookup","observation":{"step":1,"tool":"scheme-lookup","ok":true,"output":{"name":"balanced","scheme":{"timeout_sec":30,"max_retries":3,"backoff_ms":500,"cost_budget_usd":0.1,"description":"Default: retry x3 with backoff. For ordinary agent steps."}},"latencyMs":1,"attempt":1}}
+{"seq":4,"ts":"2026-09-25T23:33:56.246Z","runId":"scheme-lookup-s1","phase":"done","status":"done"}

@@ -1,0 +1,7 @@
+{"seq":1,"ts":"2026-09-25T23:33:56.227Z","runId":"fetch-parse-s1","phase":"plan","step":1,"tool":"web-fetch","args":{"url":"http://127.0.0.1:8899/"}}
+{"seq":2,"ts":"2026-09-25T23:33:56.227Z","runId":"fetch-parse-s1","phase":"tool","step":1,"tool":"web-fetch","args":{"url":"http://127.0.0.1:8899/"}}
+{"seq":3,"ts":"2026-09-25T23:33:56.229Z","runId":"fetch-parse-s1","phase":"observe","step":1,"tool":"web-fetch","observation":{"step":1,"tool":"web-fetch","ok":true,"output":{"url":"http://127.0.0.1:8899/","status":200,"content_type":"text/html","body":"<html><head><title>Kavach Test</title></head><body>kavach eval stub</body></html>","truncated":false},"latencyMs":2,"attempt":1}}
+{"seq":4,"ts":"2026-09-25T23:33:56.229Z","runId":"fetch-parse-s1","phase":"plan","step":2,"tool":"shell-sandboxed","args":{"command":["echo","title parsed"]}}
+{"seq":5,"ts":"2026-09-25T23:33:56.229Z","runId":"fetch-parse-s1","phase":"tool","step":2,"tool":"shell-sandboxed","args":{"command":["echo","title parsed"]}}
+{"seq":6,"ts":"2026-09-25T23:33:56.235Z","runId":"fetch-parse-s1","phase":"observe","step":2,"tool":"shell-sandboxed","observation":{"step":2,"tool":"shell-sandboxed","ok":true,"output":{"exit_code":0,"output":"title parsed\n","truncated":false,"timeout_sec":30},"latencyMs":6,"attempt":1}}
+{"seq":7,"ts":"2026-09-25T23:33:56.235Z","runId":"fetch-parse-s1","phase":"done","status":"done"}

@@ -1,0 +1,10 @@
+{"seq":1,"ts":"2026-09-25T23:33:56.375Z","runId":"multi-tool-chain-s1","phase":"plan","step":1,"tool":"scheme-lookup","args":{"name":"fast"}}
+{"seq":2,"ts":"2026-09-25T23:33:56.375Z","runId":"multi-tool-chain-s1","phase":"tool","step":1,"tool":"scheme-lookup","args":{"name":"fast"}}
+{"seq":3,"ts":"2026-09-25T23:33:56.376Z","runId":"multi-tool-chain-s1","phase":"observe","step":1,"tool":"scheme-lookup","observation":{"step":1,"tool":"scheme-lookup","ok":true,"output":{"name":"fast","scheme":{"timeout_sec":10,"max_retries":1,"backoff_ms":200,"cost_budget_usd":0.01,"description":"Single quick attempt, tiny budget. For lookups and pings."}},"latencyMs":1,"attempt":1}}
+{"seq":4,"ts":"2026-09-25T23:33:56.376Z","runId":"multi-tool-chain-s1","phase":"plan","step":2,"tool":"file-read","args":{"path":"notes/todo.md"}}
+{"seq":5,"ts":"2026-09-25T23:33:56.376Z","runId":"multi-tool-chain-s1","phase":"tool","step":2,"tool":"file-read","args":{"path":"notes/todo.md"}}
+{"seq":6,"ts":"2026-09-25T23:33:56.377Z","runId":"multi-tool-chain-s1","phase":"observe","step":2,"tool":"file-read","observation":{"step":2,"tool":"file-read","ok":true,"output":{"path":"notes/todo.md","size_bytes":34,"content":"buy milk\nwrite resume\nship kavach\n","truncated":false},"latencyMs":1,"attempt":1}}
+{"seq":7,"ts":"2026-09-25T23:33:56.377Z","runId":"multi-tool-chain-s1","phase":"plan","step":3,"tool":"shell-sandboxed","args":{"command":["wc","-w","notes/todo.md"]}}
+{"seq":8,"ts":"2026-09-25T23:33:56.377Z","runId":"multi-tool-chain-s1","phase":"tool","step":3,"tool":"shell-sandboxed","args":{"command":["wc","-w","notes/todo.md"]}}
+{"seq":9,"ts":"2026-09-25T23:33:56.382Z","runId":"multi-tool-chain-s1","phase":"observe","step":3,"tool":"shell-sandboxed","observation":{"step":3,"tool":"shell-sandboxed","ok":true,"output":{"exit_code":0,"output":"       6 notes/todo.md\n","truncated":false,"timeout_sec":30},"latencyMs":5,"attempt":1}}
+{"seq":10,"ts":"2026-09-25T23:33:56.382Z","runId":"multi-tool-chain-s1","phase":"done","status":"done"}
