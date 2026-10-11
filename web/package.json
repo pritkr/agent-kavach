@@ -1,0 +1,25 @@
+{
+  "name": "agent-kavach-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SSE dashboard for agent-kavach: live stream, cost/latency chart, kill-switch, replay",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "bun check && vite build",
+    "typecheck": "bun check",
+    "check": "bun check",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}
